@@ -11,7 +11,6 @@ public interface IAuthService {
 
     User signUp(String email, String password) throws UserAlreadyExistsException;
 
-    User login(String email, String password) throws UserNotRegisteredException, PasswordMismatchException;
+    Pair<User,String> login(String email, String password) throws UserNotRegisteredException, PasswordMismatchException;
 
-    //Pair<User,String> login(String email, String password) throws UserNotRegisteredException, PasswordMismatchException;
 }

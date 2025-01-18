@@ -1,6 +1,7 @@
 package in.codecraftsbysanta.userauthservice.dtos;
 
 import in.codecraftsbysanta.userauthservice.models.Role;
+
 import lombok.Getter;
 import lombok.Setter;
 
