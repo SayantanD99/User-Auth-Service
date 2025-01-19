@@ -65,23 +65,6 @@ public class AuthService implements IAuthService{
             throw new PasswordMismatchException("Password mismatch. Please try again");
         }
 
-//        if(!password.equals(storedPassword)){
-//            throw new PasswordMismatchException("Password mismatch. Please try again");
-//        }
-
-        //Generating JWT
-//        String message = "{\n" +
-//                "   \"email\": \"anurag@gmail.com\",\n" +
-//                "   \"roles\": [\n" +
-//                "      \"instructor\",\n" +
-//                "      \"buddy\"\n" +
-//                "   ],\n" +
-//                "   \"expirationDate\": \"2ndApril2025\"\n" +
-//                "}";
-//
-//        byte[] content = message.getBytes(StandardCharsets.UTF_8);
-//        String token = Jwts.builder().content(content).compact();
-
         Map<String,Object> payload = new HashMap<>();
         Long nowInMillis = System.currentTimeMillis();
         payload.put("iat",nowInMillis);
