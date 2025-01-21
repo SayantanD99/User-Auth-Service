@@ -13,4 +13,6 @@ public interface IAuthService {
 
     Pair<User,String> login(String email, String password) throws UserNotRegisteredException, PasswordMismatchException;
 
+    Boolean validateToken(String token,Long userId);
+
 }

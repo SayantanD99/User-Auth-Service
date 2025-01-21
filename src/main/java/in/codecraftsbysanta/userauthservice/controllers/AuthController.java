@@ -3,14 +3,16 @@ package in.codecraftsbysanta.userauthservice.controllers;
 import in.codecraftsbysanta.userauthservice.dtos.LoginRequest;
 import in.codecraftsbysanta.userauthservice.dtos.SignUpRequest;
 import in.codecraftsbysanta.userauthservice.dtos.UserDTO;
-
+import in.codecraftsbysanta.userauthservice.dtos.ValidateTokenDTO;
 import in.codecraftsbysanta.userauthservice.exceptions.PasswordMismatchException;
+import in.codecraftsbysanta.userauthservice.exceptions.UnauthorizedException;
 import in.codecraftsbysanta.userauthservice.exceptions.UserAlreadyExistsException;
 import in.codecraftsbysanta.userauthservice.exceptions.UserNotRegisteredException;
 import in.codecraftsbysanta.userauthservice.models.User;
 import in.codecraftsbysanta.userauthservice.services.IAuthService;
 
 import org.antlr.v4.runtime.misc.Pair;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -54,6 +56,18 @@ public class AuthController {
         catch (PasswordMismatchException exception){
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/validateToken")
+    public Boolean validateToken(@RequestBody ValidateTokenDTO validateTokenDto) throws UnauthorizedException{
+
+        Boolean result = authService.validateToken(validateTokenDto.getToken(), validateTokenDto.getUserId());
+
+        if(result == false) {
+            throw new UnauthorizedException("Please login again, Inconvenience Regretted");
+        }
+
+        return result;
     }
 
     public UserDTO from(User user){
