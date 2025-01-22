@@ -2,7 +2,6 @@ package in.codecraftsbysanta.userauthservice.security;
 
 import in.codecraftsbysanta.userauthservice.models.User;
 import in.codecraftsbysanta.userauthservice.repos.UserRepo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

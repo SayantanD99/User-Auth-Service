@@ -10,9 +10,7 @@ import in.codecraftsbysanta.userauthservice.exceptions.UserAlreadyExistsExceptio
 import in.codecraftsbysanta.userauthservice.exceptions.UserNotRegisteredException;
 import in.codecraftsbysanta.userauthservice.models.User;
 import in.codecraftsbysanta.userauthservice.services.IAuthService;
-
 import org.antlr.v4.runtime.misc.Pair;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

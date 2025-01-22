@@ -9,19 +9,15 @@ import in.codecraftsbysanta.userauthservice.models.Status;
 import in.codecraftsbysanta.userauthservice.models.User;
 import in.codecraftsbysanta.userauthservice.repos.SessionRepo;
 import in.codecraftsbysanta.userauthservice.repos.UserRepo;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.MacAlgorithm;
 import org.antlr.v4.runtime.misc.Pair;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Service

@@ -4,7 +4,6 @@ import in.codecraftsbysanta.userauthservice.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 
