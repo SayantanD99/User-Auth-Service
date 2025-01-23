@@ -41,7 +41,9 @@ public class AuthService implements IAuthService{
         Optional<User> user = userRepo.findByEmail(email);
 
         if(user.isPresent()){
+
             throw new UserAlreadyExistsException("User already exists with email. Please login");
+
         }
 
         User newUser = new User();
@@ -73,13 +75,17 @@ public class AuthService implements IAuthService{
         Optional<User> userOptional = userRepo.findByEmail(email);
 
         if(userOptional.isEmpty()){
+
             throw new UserNotRegisteredException("User not registered. Please signup");
+
         }
 
         String storedPassword = userOptional.get().getPassword();
 
         if(!bCryptPasswordEncoder.matches(password, storedPassword)){
+
             throw new PasswordMismatchException("Password mismatch. Please try again");
+
         }
 
         Map<String,Object> payload = new HashMap<>();
@@ -106,6 +112,7 @@ public class AuthService implements IAuthService{
         sessionRepo.save(session);
 
         return new Pair<User,String>(userOptional.get(),token);
+
     }
 
     //validateToken(userId, token) {
@@ -121,7 +128,9 @@ public class AuthService implements IAuthService{
         Optional<Session> optionalSession = sessionRepo.findByTokenAndUser_Id(token,userId);
 
         if(optionalSession.isEmpty()) {
+
             return false;
+
         }
 
         JwtParser jwtParser = Jwts.parser().verifyWith(secretKey).build();
@@ -136,13 +145,16 @@ public class AuthService implements IAuthService{
         System.out.println(currentTime);
 
         if(currentTime > tokenExpiry) {
+
             Session session = optionalSession.get();
             session.setStatus(Status.INACTIVE);
             sessionRepo.save(session);
             return false;
+
         }
 
         return true;
+
     }
 
 }

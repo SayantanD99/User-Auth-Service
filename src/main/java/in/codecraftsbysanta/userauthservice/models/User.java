@@ -13,8 +13,10 @@ import java.util.List;
 @Setter
 @Entity
 public class User extends BaseModel{
+
     private String email;
     private String password;
+
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Role> roles= new ArrayList<>();
 

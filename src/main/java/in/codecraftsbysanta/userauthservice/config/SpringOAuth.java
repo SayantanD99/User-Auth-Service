@@ -44,8 +44,8 @@ public class SpringOAuth {
 
     @Bean
     @Order(1)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
-            throws Exception {
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
                 OAuth2AuthorizationServerConfigurer.authorizationServer();
 
@@ -69,12 +69,13 @@ public class SpringOAuth {
                 );
 
         return http.build();
+
     }
 
     @Bean
     @Order(2)
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
-            throws Exception {
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .anyRequest().authenticated()
@@ -84,6 +85,7 @@ public class SpringOAuth {
                 .formLogin(Customizer.withDefaults());
 
         return http.build();
+
     }
 
 //    on login page -> "password" ->
@@ -103,6 +105,7 @@ public class SpringOAuth {
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
+
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
                 .clientSecret("{noop}secret")
@@ -117,10 +120,12 @@ public class SpringOAuth {
                 .build();
 
         return new InMemoryRegisteredClientRepository(oidcClient);
+
     }
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
+
         KeyPair keyPair = generateRsaKey();
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
@@ -130,29 +135,42 @@ public class SpringOAuth {
                 .build();
         JWKSet jwkSet = new JWKSet(rsaKey);
         return new ImmutableJWKSet<>(jwkSet);
+
     }
 
     private static KeyPair generateRsaKey() {
+
         KeyPair keyPair;
+
         try {
+
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
             keyPairGenerator.initialize(2048);
             keyPair = keyPairGenerator.generateKeyPair();
+
         }
         catch (Exception ex) {
+
             throw new IllegalStateException(ex);
+
         }
+
         return keyPair;
+
     }
 
     @Bean
     public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+
         return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+
     }
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
+
         return AuthorizationServerSettings.builder().build();
+
     }
 
 }
