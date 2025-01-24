@@ -51,8 +51,11 @@ public class AuthController {
         try{
 
             Pair<User, String> response = authService.login(loginRequest.getEmail(), loginRequest.getPassword());
+
             MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+
             headers.add(HttpHeaders.SET_COOKIE, response.b);
+
             return new ResponseEntity<>(from(response.a), headers, HttpStatus.OK);
 
         }
